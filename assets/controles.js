@@ -1,8 +1,26 @@
-const bancoDeLivros = [
-    'Os tres porquinhos',
-    'Cinderela',
-    'A pequena sereia'
-];
+
+
+function getBancoLivros(){
+
+    const localStorage = window.localStorage;
+
+    let bancoLivros = localStorage.getItem('bancoLivros');
+    if(bancoLivros == null){
+        localStorage.setItem('bancoLivros', JSON.stringify([]));
+    }
+
+    return JSON.parse(localStorage.getItem('bancoLivros'));
+
+}
+
+function setBancoLivros(livros){
+
+    const localStorage = window.localStorage;
+    localStorage.setItem('bancoLivros', JSON.stringify(livros));
+
+}
+
+const bancoDeLivros = getBancoLivros();
 
 function obterIndiceDoLivro(nome){
     let indiceDoLivro = -1;
@@ -19,6 +37,7 @@ function obterIndiceDoLivro(nome){
 
 function adicionaLivro(nome){
     bancoDeLivros.push(nome);
+    setBancoLivros(bancoDeLivros);
 }
 
 function removeLivro(nome){
@@ -26,6 +45,7 @@ function removeLivro(nome){
     const indiceDoLivro = obterIndiceDoLivro(nome);
 
     if( indiceDoLivro > -1 ){
+        setBancoLivros(bancoDeLivros);
         bancoDeLivros.splice(indiceDoLivro, 1);
         console.log('O item '+nome+' foi removido com sucesso');
         return;
@@ -40,6 +60,7 @@ function alteraLivro(nome, substituicao){
     const indiceDoLivro = obterIndiceDoLivro(nome);
 
     if( indiceDoLivro > -1 ){
+        setBancoLivros(bancoDeLivros);
         bancoDeLivros.splice(indiceDoLivro, 1, substituicao);
         console.log('O item '+nome+' foi alterado com sucesso');
         return;
