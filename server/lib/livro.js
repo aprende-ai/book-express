@@ -1,3 +1,4 @@
+const DBObject = require('./db/db-object');
 const Autor = require('./autor');
 const Editora = require('./editora');
 
@@ -11,7 +12,11 @@ function Livro(){
     this.preco = 0;
     this.unidadesEstoque = 0;
 
+    DBObject.call(this, 'livros');
+
 }
+
+Livro.prototype = Object.create(DBObject.prototype);
 
 Livro.prototype.getTitulo = function(){
     return this.titulo;

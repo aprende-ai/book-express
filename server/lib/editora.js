@@ -1,3 +1,4 @@
+const DBObject = require('./db/db-object');
 const Autor = require('./autor');
 
 function Editora(){
@@ -5,7 +6,10 @@ function Editora(){
     this.nome = null;
     this.autores = [];
 
+    DBObject.call(this, 'editoras');
 }
+
+Editora.prototype = Object.create(DBObject.prototype);
 
 Editora.prototype.getNome = function(){
     return this.nome;
