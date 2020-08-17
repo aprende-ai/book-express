@@ -1,22 +1,18 @@
+const path = require('path');
+const db = require('./lib/db');
+
+const jsonFilePath = path.join(__dirname,'db.json');
+db.setJsonFilePath(jsonFilePath);
+
 const Livro = require('./lib/livro');
-const Editora = require('./lib/editora');
 const Autor = require('./lib/autor');
+const Editora = require('./lib/editora');
 
-const dataNascimentoPaulBarry = new Date("April 19, 1973");
+const l = new Livro();
+l.save();
 
-const paulBarry = new Autor();
-paulBarry.setNome('Paul Barry');
-paulBarry.setDataNascimento(dataNascimentoPaulBarry);
+const a = new Autor();
+a.save();
 
-const altaBooks = new Editora();
-altaBooks.setNome('Alta Books');
-altaBooks.addAutor(paulBarry);
-
-const livro1 = new Livro();
-livro1.setTitulo('Use a cabeça! Programação')
-    .setIsbn(9788576084730)
-    .addAutor(paulBarry);
-
-paulBarry.addLivro(livro1);
-
-console.log(livro1);
+const e = new Editora();
+e.save();
