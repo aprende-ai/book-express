@@ -10,7 +10,7 @@ DBObject.prototype.save = function(){
 
     this.collection.push(this);
     this.instance.save();
-    
+
 }
 
 module.exports = DBObject;
