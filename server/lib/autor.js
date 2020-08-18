@@ -4,7 +4,6 @@ function Autor(){
 
     this.nome = null;
     this.dataNascimento = null;
-    this.livros = [];
 
     DBObject.call(this, 'autores');
 }
@@ -30,6 +29,14 @@ Autor.prototype.setDataNascimento = function(data){
         this.dataNascimento = data;
 
     return this;
+}
+
+Autor.prototype.toObject = function(){
+
+    return {
+        nome: this.nome,
+        dataNascimento: this.dataNascimento
+    }
 }
 
 module.exports = Autor;

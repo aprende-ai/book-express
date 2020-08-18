@@ -48,4 +48,19 @@ Editora.prototype.removeAutor = function(autor){
 
 }
 
+Editora.prototype.toObject = function(){
+
+    let totalAutores = this.autores.length - 1;
+    const autores = [];
+    while(totalAutores >= 0){
+        autores.push(this.autores[totalAutores].getNome());
+        totalAutores--;
+    }
+
+    return {
+        nome: this.nome,
+        autores
+    }
+}
+
 module.exports = Editora;

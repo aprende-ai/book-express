@@ -64,22 +64,22 @@ Livro.prototype.setIsbn = function(isbn){
     return this;
 }
 
-Livro.getEditora = function(){
+Livro.prototype.getEditora = function(){
     return this.editora;
 }
 
-Livro.setEditora = function(editora){
+Livro.prototype.setEditora = function(editora){
     if( editora instanceof Editora )
         this.editora = editora;
 
     return this
 }
 
-Livro.getPreco = function(){
+Livro.prototype.getPreco = function(){
     return this.preco;
 }
 
-Livro.setPreco = function(preco){
+Livro.prototype.setPreco = function(preco){
 
     const precoAsFloat = parseFloat(preco);
 
@@ -95,11 +95,11 @@ Livro.setPreco = function(preco){
     return this;
 }
 
-Livro.getUnidadesEstoque = function(){
+Livro.prototype.getUnidadesEstoque = function(){
     return this.unidadesEstoque;
 }
 
-Livro.setUnidadesEstoque = function(unidadesEstoque){
+Livro.prototype.setUnidadesEstoque = function(unidadesEstoque){
 
     const unidadesAsInt = parseInt(unidadesEstoque);
 
@@ -112,6 +112,29 @@ Livro.setUnidadesEstoque = function(unidadesEstoque){
 
     this.unidadesEstoque = unidadesEstoque;
 
+}
+
+Livro.prototype.toObject = function(){
+
+    const autores = [];
+    if(this.autores.length > 0){
+        let idx = 0;
+        do{
+            autores.push(this.autores[idx].getNome());
+            idx++;
+        }while(idx <= this.autores.length - 1)
+    }
+
+    const editora = this.editora.getNome()
+
+    return {
+        titulo: this.titulo,
+        autores,
+        isbn: this.isbn,
+        editora,
+        preco: this.preco,
+        unidadesEstoque: this.unidadesEstoque
+    }
 }
 
 module.exports = Livro;
