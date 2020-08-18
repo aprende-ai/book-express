@@ -112,6 +112,7 @@ Livro.prototype.setUnidadesEstoque = function(unidadesEstoque){
 
     this.unidadesEstoque = unidadesEstoque;
 
+    return this;
 }
 
 Livro.prototype.toObject = function(){
