@@ -31,7 +31,22 @@ DB.prototype.sync = function(){
         totalCollections--;
     }
 
-    console.log(this.data);
+    const createdCollections = Object.keys(this.data);
+    const createdCollectionsCount = createdCollections.length -1;
+    let collectionIndex = 0;
+    while(collectionIndex <= createdCollectionsCount){
+        const collectionName = createdCollections[collectionIndex];
+        const collection = this.data[collectionName];
+        let itemIndex = collection.length - 1;
+
+        while(itemIndex >= 0){
+            collection[itemIndex].link(data);
+            itemIndex--;
+        }
+
+        collectionIndex++;
+    }
+
 }
 
 DB.prototype.save = function(){
