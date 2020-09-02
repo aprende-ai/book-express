@@ -39,4 +39,8 @@ Autor.prototype.toObject = function(){
     }
 }
 
+Autor.prototype.link = function(rawData){
+    
+}
+
 module.exports = Autor;

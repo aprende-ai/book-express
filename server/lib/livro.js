@@ -138,4 +138,38 @@ Livro.prototype.toObject = function(){
     }
 }
 
+Livro.prototype.link = function(rawData){
+    const collection = rawData[this.collectionName];
+
+    if( typeof collection === 'undefined' )
+        return false;
+
+    let livro = null;
+    for(let i=0; i<=collection.length-1; i++){
+        if( collection[i].titulo === this.getTitulo()
+            && collection[i].isbn === this.getIsbn() ){
+            livro = collection[i];
+            break;
+        }
+    }
+
+    const editoraCollection = this.instance.data['editoras'];
+    for(let j=0; j<=editoraCollection.length - 1; j++){
+        const editora = editoraCollection[j];
+        if(livro.editora === editora.getNome()){
+            this.setEditora(editora);
+            break;
+        }
+    }
+
+    const autorCollection = this.instance.data['autores'];
+    for(let k=0; k<=autorCollection.length - 1; k++){
+        const autor = autorCollection[k];
+        if(livro.autores.indexOf(autor.getNome()) >= 0){
+            this.addAutor(autor);
+            break;
+        }
+    }
+}
+
 module.exports = Livro;

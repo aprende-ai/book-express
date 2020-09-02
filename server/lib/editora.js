@@ -63,4 +63,28 @@ Editora.prototype.toObject = function(){
     }
 }
 
+Editora.prototype.link = function(rawData){
+    const collection = rawData[this.collectionName];
+
+    if( typeof collection === 'undefined' )
+        return false;
+
+    let editora = null;
+    for(let i=0; i<=collection.length-1; i++){
+        if( collection[i].nome === this.getNome()){
+            editora = collection[i];
+            break;
+        }
+    }
+
+    const autorCollection = this.instance.data['autores'];
+    for(let k=0; k<=autorCollection.length - 1; k++){
+        const autor = autorCollection[k];
+        if(editora.autores.indexOf(autor.getNome()) >= 0){
+            this.addAutor(autor);
+            break;
+        }
+    }
+}
+
 module.exports = Editora;
