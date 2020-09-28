@@ -2,174 +2,158 @@ const DBObject = require('./db/db-object');
 const Autor = require('./autor');
 const Editora = require('./editora');
 
-function Livro(){
+class Livro extends DBObject{
 
-    this.titulo = null;
-    this.autores = [];
-    this.isbn = null;
-    this.editora = null;
+    constructor(){
 
-    this.preco = 0;
-    this.unidadesEstoque = 0;
+        super('livros');
 
-    DBObject.call(this, 'livros');
+        this.titulo = null;
+        this.autores = [];
+        this.isbn = null;
+        this.editora = null;
 
-}
+        this.preco = 0;
+        this.unidadesEstoque = 0;
 
-Livro.prototype = Object.create(DBObject.prototype);
 
-Livro.prototype.getTitulo = function(){
-    return this.titulo;
-}
-
-Livro.prototype.setTitulo = function(titulo){
-    this.titulo = titulo;
-    return this;
-}
-
-Livro.prototype.getAutores = function(){
-    return this.autores;
-}
-
-Livro.prototype.addAutor = function(autor){
-
-    if(autor instanceof Autor){
-        this.autores.push(autor);
-    }
-
-    return this;
-}
-
-Livro.prototype.removeAutor = function(autor){
-
-    if(autor instanceof Autor){
-
-        const index = this.autores.indexOf(autor);
-
-        if(index === -1)
-            return;
-
-        this.autores.splice(index,1);
 
     }
 
-}
 
-Livro.prototype.getIsbn = function(){
-    return this.isbn;
-}
-
-Livro.prototype.setIsbn = function(isbn){
-    this.isbn = isbn;
-    return this;
-}
-
-Livro.prototype.getEditora = function(){
-    return this.editora;
-}
-
-Livro.prototype.setEditora = function(editora){
-    if( editora instanceof Editora )
-        this.editora = editora;
-
-    return this
-}
-
-Livro.prototype.getPreco = function(){
-    return this.preco;
-}
-
-Livro.prototype.setPreco = function(preco){
-
-    const precoAsFloat = parseFloat(preco);
-
-    if(isNaN(precoAsFloat)){
-        return false;
+    getTitulo(){
+        return this.titulo;
     }
 
-    if(preco < 0)
-        return false;
-
-    this.preco = preco;
-
-    return this;
-}
-
-Livro.prototype.getUnidadesEstoque = function(){
-    return this.unidadesEstoque;
-}
-
-Livro.prototype.setUnidadesEstoque = function(unidadesEstoque){
-
-    const unidadesAsInt = parseInt(unidadesEstoque);
-
-    if(isNaN(unidadesAsInt)){
-        return false;
+    setTitulo(titulo){
+        this.titulo = titulo;
+        return this;
     }
 
-    if(unidadesEstoque < 0)
-        return false;
-
-    this.unidadesEstoque = unidadesEstoque;
-
-    return this;
-}
-
-Livro.prototype.toObject = function(){
-
-    const autores = [];
-    if(this.autores.length > 0){
-        let idx = 0;
-        do{
-            autores.push(this.autores[idx].getNome());
-            idx++;
-        }while(idx <= this.autores.length - 1)
+    getAutores(){
+        return this.autores;
     }
 
-    const editora = this.editora.getNome()
+    addAutor(autor){
+        if(autor instanceof Autor){
+            this.autores.push(autor);
+        }
 
-    return {
-        titulo: this.titulo,
-        autores,
-        isbn: this.isbn,
-        editora,
-        preco: this.preco,
-        unidadesEstoque: this.unidadesEstoque
+        return this;
     }
-}
 
-Livro.prototype.link = function(rawData){
-    const collection = rawData[this.collectionName];
+    removeAutor(autor){
+        if(autor instanceof Autor){
 
-    if( typeof collection === 'undefined' )
-        return false;
+            const index = this.autores.indexOf(autor);
 
-    let livro = null;
-    for(let i=0; i<=collection.length-1; i++){
-        if( collection[i].titulo === this.getTitulo()
-            && collection[i].isbn === this.getIsbn() ){
-            livro = collection[i];
-            break;
+            if(index === -1)
+                return;
+
+            this.autores.splice(index,1);
+
         }
     }
 
-    const editoraCollection = this.instance.data['editoras'];
-    for(let j=0; j<=editoraCollection.length - 1; j++){
-        const editora = editoraCollection[j];
-        if(livro.editora === editora.getNome()){
+    getIsbn(){
+        return this.isbn;
+    }
+
+    setIsbn(isbn){
+        this.isbn = isbn;
+        return this;
+    }
+
+    getEditora(){
+        return this.editora;
+    }
+
+    setEditora(editora){
+        if( editora instanceof Editora )
+            this.editora = editora;
+
+        return this
+    }
+
+    getPreco(){
+        return this.preco;
+    }
+
+    setPreco(preco){
+        const precoAsFloat = parseFloat(preco);
+
+        if(isNaN(precoAsFloat)){
+            return false;
+        }
+
+        if(preco < 0)
+            return false;
+
+        this.preco = preco;
+
+        return this;
+    }
+
+    getUnidadesEstoque(){
+        return this.unidadesEstoque;
+    }
+
+    setUnidadesEstoque(unidadesEstoque){
+        const unidadesAsInt = parseInt(unidadesEstoque);
+
+       if(isNaN(unidadesAsInt)){
+           return false;
+       }
+
+       if(unidadesEstoque < 0)
+           return false;
+
+       this.unidadesEstoque = unidadesEstoque;
+
+       return this;
+
+    }
+
+    toObject(){
+
+        const autores = this.autores.map( autor => autor.getNome());
+
+        const editora = this.editora.getNome()
+
+        return {
+            titulo: this.titulo,
+            autores,
+            isbn: this.isbn,
+            editora,
+            preco: this.preco,
+            unidadesEstoque: this.unidadesEstoque
+        }
+    }
+
+    link(rawData){
+        const collection = rawData[this.collectionName];
+
+        if( typeof collection === 'undefined' )
+            return false;
+
+        const livro = collection.find( livro =>
+                livro.titulo === this.getTitulo()
+                && livro.isbn === this.getIsbn()
+        );
+
+        const editoraCollection = this.instance.data['editoras'];
+        const editora = editoraCollection.find( editora =>
+            livro.editora === editora.getNome()
+        );
+        if(editora != null)
             this.setEditora(editora);
-            break;
-        }
+
+        const autorCollection = this.instance.data['autores'];
+        autorCollection
+            .filter( autor => livro.autores.indexOf(autor.getNome()) >= 0 )
+            .forEach( autor => this.addAutor(autor) );
     }
 
-    const autorCollection = this.instance.data['autores'];
-    for(let k=0; k<=autorCollection.length - 1; k++){
-        const autor = autorCollection[k];
-        if(livro.autores.indexOf(autor.getNome()) >= 0){
-            this.addAutor(autor);
-            break;
-        }
-    }
 }
 
 module.exports = Livro;

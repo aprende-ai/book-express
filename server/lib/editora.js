@@ -1,90 +1,83 @@
 const DBObject = require('./db/db-object');
 const Autor = require('./autor');
 
-function Editora(){
+class Editora extends DBObject{
 
-    this.nome = null;
-    this.autores = [];
+    constructor(){
 
-    DBObject.call(this, 'editoras');
-}
+        super('editoras');
 
-Editora.prototype = Object.create(DBObject.prototype);
+        this.nome = null;
+        this.autores = [];
 
-Editora.prototype.getNome = function(){
-    return this.nome;
-}
-
-Editora.prototype.setNome = function(nome){
-    this.nome = nome;
-    return this;
-}
-
-Editora.prototype.getAutores = function(){
-    return this.autores;
-}
-
-Editora.prototype.addAutor = function(autor){
-
-    if(autor instanceof Autor){
-        this.autores.push(autor);
-    }
-
-    return this;
-}
-
-Editora.prototype.removeAutor = function(autor){
-
-    if(autor instanceof Autor){
-
-        const index = this.autores.indexOf(autor);
-
-        if(index === -1)
-            return;
-
-        this.autores.splice(index,1);
 
     }
 
-}
-
-Editora.prototype.toObject = function(){
-
-    let totalAutores = this.autores.length - 1;
-    const autores = [];
-    while(totalAutores >= 0){
-        autores.push(this.autores[totalAutores].getNome());
-        totalAutores--;
+    getNome(){
+        return this.nome;
     }
 
-    return {
-        nome: this.nome,
-        autores
+    setNome(nome){
+
+        this.nome = nome;
+        return this;
+
     }
-}
 
-Editora.prototype.link = function(rawData){
-    const collection = rawData[this.collectionName];
+    getAutores(){
+        return this.autores;
+    }
 
-    if( typeof collection === 'undefined' )
-        return false;
+    addAutor(autor){
+        if(autor instanceof Autor){
+            this.autores.push(autor);
+        }
 
-    let editora = null;
-    for(let i=0; i<=collection.length-1; i++){
-        if( collection[i].nome === this.getNome()){
-            editora = collection[i];
-            break;
+        return this;
+    }
+
+    removeAutor(autor){
+        if(autor instanceof Autor){
+
+            const index = this.autores.indexOf(autor);
+
+            if(index === -1)
+                return;
+
+            this.autores.splice(index,1);
+
         }
     }
 
-    const autorCollection = this.instance.data['autores'];
-    for(let k=0; k<=autorCollection.length - 1; k++){
-        const autor = autorCollection[k];
-        if(editora.autores.indexOf(autor.getNome()) >= 0){
-            this.addAutor(autor);
-            break;
+    toObject(){
+
+        const autores = this.autores.map( autor => autor.getNome() );
+
+        return {
+            nome: this.nome,
+            autores
         }
+
     }
+
+    link(rawData){
+
+        const collection = rawData[this.collectionName];
+
+        if( typeof collection === 'undefined' )
+            return false;
+
+        const editora = collection.find( editora => editora.nome === this.getNome() );
+
+        const autorCollection = this.instance.data['autores'];
+
+        autorCollection.forEach( autor => {
+            if(editora.autores.indexOf(autor.getNome()) >= 0){
+                this.addAutor(autor);
+            }
+        });
+    }
+
 }
 
 module.exports = Editora;

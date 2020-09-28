@@ -1,46 +1,47 @@
 const DBObject = require('./db/db-object');
 
-function Autor(){
+class Autor extends DBObject{
 
-    this.nome = null;
-    this.dataNascimento = null;
+    constructor(){
 
-    DBObject.call(this, 'autores');
-}
+        super('autor');
 
-Autor.prototype = Object.create(DBObject.prototype);
+        this.nome = null;
+        this.dataNascimento = null;
 
-Autor.prototype.getNome = function(){
-    return this.nome;
-}
-
-Autor.prototype.setNome = function(nome){
-    this.nome = nome;
-
-    return this;
-}
-
-Autor.prototype.getDataNascimento = function(){
-    return this.dataNascimento
-}
-
-Autor.prototype.setDataNascimento = function(data){
-    if(data instanceof Date)
-        this.dataNascimento = data;
-
-    return this;
-}
-
-Autor.prototype.toObject = function(){
-
-    return {
-        nome: this.nome,
-        dataNascimento: this.dataNascimento
     }
+
+    getNome(){
+        return this.nome;
+    }
+
+    setNome(nome){
+        this.nome = nome;
+        return this;
+    }
+
+    getDataNascimento(){
+        return this.dataNascimento;
+    }
+
+    setDataNascimento(data){
+        if(data instanceof Date)
+            this.dataNascimento = data;
+
+        return this;
+    }
+
+    toObject(){
+        return {
+            nome: this.nome,
+            dataNascimento: this.dataNascimento
+        }
+    }
+
+    link(){
+
+    }
+
 }
 
-Autor.prototype.link = function(rawData){
-    
-}
-
-module.exports = Autor;
+module.exports = Autor

@@ -1,16 +1,17 @@
 const db = require('./index');
 
-function DBObject(collection){
-    this.collectionName = collection;
-    this.instance = db.getInstance();
-    this.collection = this.instance.data[this.collectionName];
-}
+class DBObject{
 
-DBObject.prototype.save = function(){
+    constructor(collection){
+        this.collectionName = collection;
+        this.instance = db.getInstance();
+        this.collection = this.instance.data[this.collectionName];
+    }
 
-    this.collection.push(this);
-    this.instance.save();
-
+    save(){
+        this.collection.push(this);
+        this.instance.save();
+    }
 }
 
 module.exports = DBObject;
