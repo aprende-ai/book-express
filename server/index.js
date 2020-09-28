@@ -26,4 +26,6 @@ db.setObjectCreator( function(collection, item){
                 .setDataNascimento(item.dataNascimento);
     }
 })
-db.getInstance();
+const instance = db.getInstance();
+
+console.log(instance.data.livros[0]);
