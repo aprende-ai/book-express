@@ -1,0 +1,22 @@
+{
+  "name": "book-express",
+  "version": "1.0.0",
+  "description": "Aplicação desenvolvida para o curso de Node Js do Aprende Ai",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dansoah/book-express.git"
+  },
+  "author": "Danilo Rechi",
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://github.com/dansoah/book-express/issues"
+  },
+  "homepage": "https://github.com/dansoah/book-express#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
