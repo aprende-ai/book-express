@@ -69,10 +69,13 @@ class Livro extends DBObject{
     }
 
     setEditora(editora){
-        if( editora instanceof Editora )
+        if( editora instanceof Editora ){
             this.editora = editora;
+            return this
+        }
 
-        return this
+        throw new Error('A editora deve ser uma instancia da classe Editora');
+
     }
 
     getPreco(){
@@ -83,13 +86,13 @@ class Livro extends DBObject{
         const precoAsFloat = parseFloat(preco);
 
         if(isNaN(precoAsFloat)){
-            return false;
+            throw new Error('O preço deve ser um número válido');
         }
 
         if(preco < 0)
-            return false;
+            throw new Error('O preço deve ser maior ou igual a zero');
 
-        this.preco = preco;
+        this.preco = precoAsFloat;
 
         return this;
     }
@@ -102,13 +105,13 @@ class Livro extends DBObject{
         const unidadesAsInt = parseInt(unidadesEstoque);
 
        if(isNaN(unidadesAsInt)){
-           return false;
+           throw new Error('As unidades em estoque devem ser representadas por um número');
        }
 
        if(unidadesEstoque < 0)
-           return false;
+           throw new Error('As unidades em estoque não devem ser menores do que zero');
 
-       this.unidadesEstoque = unidadesEstoque;
+       this.unidadesEstoque = unidadesAsInt;
 
        return this;
 
@@ -116,9 +119,9 @@ class Livro extends DBObject{
 
     toObject(){
 
-        const autores = this.autores.map( autor => autor.getNome());
+        const autores = this.autores.map( autor => autor.getId());
 
-        const editora = this.editora.getNome()
+        const editora = this.editora.getId();
 
         return {
             titulo: this.titulo,
@@ -143,14 +146,14 @@ class Livro extends DBObject{
 
         const editoraCollection = this.instance.data['editoras'];
         const editora = editoraCollection.find( editora =>
-            livro.editora === editora.getNome()
+            livro.editora === editora.getId()
         );
         if(editora != null)
             this.setEditora(editora);
 
         const autorCollection = this.instance.data['autores'];
         autorCollection
-            .filter( autor => livro.autores.indexOf(autor.getNome()) >= 0 )
+            .filter( autor => livro.autores.indexOf(autor.getId()) >= 0 )
             .forEach( autor => this.addAutor(autor) );
     }
 
