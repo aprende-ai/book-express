@@ -4,11 +4,21 @@ class Autor extends DBObject{
 
     constructor(){
 
-        super('autor');
+        super('autores');
 
+        this.id = null;
         this.nome = null;
         this.dataNascimento = null;
 
+    }
+
+    getId(){
+        return this.id;
+    }
+
+    setId(id){
+        this.id = id;
+        return this;
     }
 
     getNome(){
@@ -33,6 +43,7 @@ class Autor extends DBObject{
 
     toObject(){
         return {
+            id: this.id,
             nome: this.nome,
             dataNascimento: this.dataNascimento
         }
