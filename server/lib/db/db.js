@@ -15,14 +15,15 @@ class DB{
         const collections = Object.keys(data);
 
         collections.forEach( collectionName => {
+
+            if( typeof this.data[collectionName] === 'undefined' ){
+                this.data[collectionName] = [];
+            }
+
             data[collectionName].forEach( item => {
                 const obj = this.objectCreator(collectionName, item);
-                if( typeof this.data[collectionName] === 'undefined' ){
-                    this.data[collectionName] = [];
-                }
-
                 this.data[collectionName].push(obj);
-            })
+            });
         });
 
         const createdCollections = Object.keys(this.data);
