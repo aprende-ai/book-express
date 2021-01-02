@@ -9,7 +9,9 @@ class DBObject{
     }
 
     save(){
-        this.collection.push(this);
+
+        if(this.collection.indexOf(this) < 0)
+            this.collection.push(this);
         this.instance.save();
     }
 }
