@@ -22,12 +22,14 @@ const initializeDatabase = () => {
 
             case "editoras":
                 return new Editora()
+                    .setId(item.id)
                     .setNome(item.nome);
 
             case "autores":
                 return new Autor()
+                    .setId(item.id)
                     .setNome(item.nome)
-                    .setDataNascimento(item.dataNascimento);
+                    .setDataNascimento(new Date(item.dataNascimento));
         }
     })
 
