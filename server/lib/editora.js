@@ -7,10 +7,20 @@ class Editora extends DBObject{
 
         super('editoras');
 
+        this.id = null;
         this.nome = null;
         this.autores = [];
 
 
+    }
+
+    getId(){
+        return this.id;
+    }
+
+    setId(id){
+        this.id = id;
+        return this;
     }
 
     getNome(){
@@ -38,22 +48,21 @@ class Editora extends DBObject{
 
     removeAutor(autor){
         if(autor instanceof Autor){
-
             const index = this.autores.indexOf(autor);
 
             if(index === -1)
                 return;
 
             this.autores.splice(index,1);
-
         }
     }
 
     toObject(){
 
-        const autores = this.autores.map( autor => autor.getNome() );
+        const autores = this.autores.map( autor => autor.getId() );
 
         return {
+            id: this.id,
             nome: this.nome,
             autores
         }
@@ -67,12 +76,12 @@ class Editora extends DBObject{
         if( typeof collection === 'undefined' )
             return false;
 
-        const editora = collection.find( editora => editora.nome === this.getNome() );
+        const editora = collection.find( editora => editora.id === this.getId() );
 
         const autorCollection = this.instance.data['autores'];
 
         autorCollection.forEach( autor => {
-            if(editora.autores.indexOf(autor.getNome()) >= 0){
+            if(editora.autores.indexOf(autor.getId()) >= 0){
                 this.addAutor(autor);
             }
         });
