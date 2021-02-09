@@ -1,0 +1,57 @@
+*{
+    font-family: verdana;
+    font-size: 13px;
+    color: #222;
+}
+
+body{
+    margin: 0;
+}
+
+header{
+    padding-bottom: 15px;
+}
+
+header h1{
+    color: #DD6018;
+    font-size: 20px;
+    margin-left: 20px;
+}
+
+nav{
+    background-color: #DD6018;
+    color: #FFF;
+}
+
+nav a,
+nav a:active,
+nav a:visited{
+    color: #FFF;
+    text-decoration: none;
+}
+
+nav a.active{
+    font-weight: bold;
+}
+
+nav a:hover{
+    font-weight: bold;
+}
+
+nav ul{
+    list-style: none;
+    padding: 15px;
+}
+
+nav ul li{
+    display: inline;
+    margin-left: 20px;
+}
+
+main .panel:not(#autores){
+    display: none;
+}
+
+main .panel{
+    padding: 20px;
+}

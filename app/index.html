@@ -8,27 +8,63 @@
 
     <body>
 
-        <div class="container">
+        <link rel="stylesheet" href="assets/main.css" />
 
-            <div class="left">
+        <header>
+            <h1> Book Express </h1>
+        </header>
+        <nav>
+            <ul>
+                <li> <a id="navLinkAutores" href="#" class="active" onclick="goToPanel('autores')"> Autores </a> </li>
+                <li> <a id="navLinkEditoras" href="#" onclick="goToPanel('editoras')"> Editoras </a> </li>
+                <li> <a id="navLinkLivros" href="#" onclick="goToPanel('livros')"> Livros </a> </li>
+            </ul>
+        </nav>
 
-                <input id="nome-livro" type="text" />
-                <button onclick="salvarLivro()"> Salvar </button>
+        <main>
 
+            <div id="autores" class="panel">
+                Autores!
             </div>
 
-            <div class="right">
-
-                <ul>
-                </ul>
-
+            <div id="editoras" class="panel">
+                Editoras!
             </div>
 
-        </div>
+            <div id="livros" class="panel">
+                Livros!
+            </div>
 
-        <script src="assets/controles.js"> </script>
-        <script src="assets/interface.js"> </script>
+        </main>
+
+        <script src="assets/main.js"> </script>
 
     </body>
 
 </html>
+
+
+<!--
+
+<div class="container">
+
+    <div class="left">
+
+        <input id="nome-livro" type="text" />
+        <button onclick="saveBook()"> Salvar </button>
+
+    </div>
+
+    <div class="right">
+
+        <ul>
+        </ul>
+
+    </div>
+
+</div>
+
+<script src="assets/controles.js"> </script>
+<script src="assets/interface.js"> </script>
+
+-->
