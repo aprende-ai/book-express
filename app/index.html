@@ -26,9 +26,9 @@
             <div id="autores" class="panel">
 
                 <div class="left">
+                    <button id="btnAuthorFormNew" class="btn-active"> Novo </button>
+                    <div class="clear"></div>
                     <ul id="lst-authors">
-                        <li> José Roberto </li>
-                        <li> Paulo Nobre </li>
                     </ul>
                 </div>
 
@@ -40,8 +40,11 @@
                     <label for="txtAuthorName"> Nome: </label>
                     <input type="text" id="txtAuthorName" value=""/> <br />
 
-                    <button class="btn-active"> Salvar </button>
-                    <button class="btn-alternative"> Cancelar </button>
+                    <label for="txtAuthorName"> Dt. Nasc.: </label>
+                    <input type="text" id="txtAuthorBday" value=""/> <br />
+
+                    <button id="btnAuthorFormSave" class="btn-active float-right"> Salvar </button>
+                    <button id="btnAuthorFormCancel" class="btn-alternative float-right"> Cancelar </button>
                 </form>
 
                 <div class="clear"></div>
@@ -100,6 +103,7 @@
         </main>
 
         <script src="assets/main.js"> </script>
+        <script src="assets/autores.js"> </script>
 
     </body>
 
