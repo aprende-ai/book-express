@@ -130,20 +130,39 @@ main .panel button.btn-alternative:disabled{
     background-color: #FFF
 }
 
-form label{
+form label:not(.checkbox-label){
     width: 67px;
     display: inline-block;
 }
 
-form input{
+form label.checkbox-label{
+    display:block;
+    width: 100%;
+    margin-top: 5px;
+}
+
+form input[type=text]{
     padding: 6px;
     width: calc(100% - 50px - 40px);
 }
 
-form input:not(:first-of-type){
+form input[type=text]:not(:first-of-type){
     margin-top: 10px;
 }
 
+form .option-list .list{
+    padding-top: 10px;
+    padding-bottom: 10px;
+    margin-top: 10px;
+    border-left: 3px solid #BED2E6;
+    margin-left: 73px;
+    padding-left: 5px;
+}
+
+form .option-list span.title{
+    display:block;
+    margin-top: 15px;
+}
 
 main .panel ul{
     margin: 0;
