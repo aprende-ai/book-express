@@ -53,22 +53,29 @@
             <div id="editoras" class="panel">
 
                 <div class="left">
-                    <ul id="lst-authors">
-                        <li> Abril </li>
-                        <li> Terra Nossa </li>
+                    <button id="btnPublisherFormNew" class="btn-active"> Novo </button>
+                    <div class="clear"></div>
+                    <ul id="lst-publisher">
                     </ul>
                 </div>
 
                 <form class="left left-border">
 
-                    <label for="txtAuthorId"> ID: </label>
-                    <input type="text" id="txtAuthorId" value="" disabled=""/> <br />
+                    <label for="txtPublisherId"> ID: </label>
+                    <input type="text" id="txtPublisherId" value="" disabled=""/> <br />
 
-                    <label for="txtAuthorName"> Nome: </label>
-                    <input type="text" id="txtAuthorName" value=""/> <br />
+                    <label for="txtPublisherName"> Nome: </label>
+                    <input type="text" id="txtPublisherName" value=""/> <br />
 
-                    <button class="btn-active"> Salvar </button>
-                    <button class="btn-alternative"> Cancelar </button>
+                    <div id="publisher-author-list" class="option-list">
+                        <span class="title"> Autores: </span>
+                        <div class="list">
+                            <label for=""><input type="checkbox" /> João Silva </label>
+                        </div>
+                    </div>
+
+                    <button id="btnPublisherFormSave" class="btn-active float-right"> Salvar </button>
+                    <button id="btnPublisherFormCancel" class="btn-alternative float-right"> Cancelar </button>
                 </form>
 
                 <div class="clear"></div>
@@ -104,6 +111,7 @@
 
         <script src="assets/main.js"> </script>
         <script src="assets/autores.js"> </script>
+        <script src="assets/editoras.js"> </script>
 
     </body>
 
