@@ -4,6 +4,10 @@
     color: #222;
 }
 
+.float-right{
+    float: right;
+}
+
 body{
     margin: 0;
 }
@@ -89,7 +93,6 @@ main .panel button.btn-alternative{
     padding-left: 15px;
     padding-right: 15px;
     margin-top: 20px;
-    float: right;
 }
 
 main .panel button.btn-active{
@@ -104,6 +107,11 @@ main .panel button.btn-active:hover{
     background-color: #3EA9FF;
 }
 
+main .panel button.btn-active:disabled{
+    color: #888;
+    background-color: #CCC;
+}
+
 main .panel button.btn-alternative{
     border: 2px solid  #4A8EFF;
     padding-top:5px;
@@ -114,6 +122,12 @@ main .panel button.btn-alternative{
 main .panel button.btn-alternative:hover{
     background-color: #4A8EFF;
     color: #FFF;
+}
+
+main .panel button.btn-alternative:disabled{
+    color: #CCC;
+    border-color: #CCC;
+    background-color: #FFF
 }
 
 form label{
