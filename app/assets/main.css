@@ -48,10 +48,84 @@ nav ul li{
     margin-left: 20px;
 }
 
+main{
+    position: absolute;
+    height: 100%;
+}
+
 main .panel:not(#autores){
     display: none;
 }
 
 main .panel{
     padding: 20px;
+    position: relative;
+    height: 100%;
+}
+
+main .panel .left{
+    padding-top: 15px;
+    float:left;
+    width: 300px;
+    height: 100%;
+}
+
+main .panel .clear{
+    clear: both;
+}
+
+main .panel .left.left-border{
+    border-left: 2px solid #CCC;
+    padding-left: 40px;
+}
+
+main .panel button:not(:first-of-type){
+    margin-right: 10px;
+}
+
+main .panel button.btn-active,
+main .panel button.btn-alternative{
+    cursor: pointer;
+    padding-left: 15px;
+    padding-right: 15px;
+    margin-top: 20px;
+    float: right;
+}
+
+main .panel button.btn-active{
+    background-color: #4A8EFF;
+    color: #FFF;
+    border: none;
+    padding-top:7px;
+    padding-bottom:7px;
+}
+
+main .panel button.btn-active:hover{
+    background-color: #3EA9FF;
+}
+
+main .panel button.btn-alternative{
+    border: 2px solid  #4A8EFF;
+    padding-top:5px;
+    padding-bottom:5px;
+    background-color: #FFF
+}
+
+main .panel button.btn-alternative:hover{
+    background-color: #4A8EFF;
+    color: #FFF;
+}
+
+form label{
+    width: 67px;
+    display: inline-block;
+}
+
+form input{
+    padding: 6px;
+    width: calc(100% - 50px - 40px);
+}
+
+form input:not(:first-of-type){
+    margin-top: 10px;
 }
